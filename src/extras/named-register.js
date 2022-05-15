@@ -6,7 +6,7 @@
  * System.register('x', ...) can be imported as System.import('x')
  */
 (function (global) {
-  var System = global.System;
+  var System = global.PentaSystem;
   setRegisterRegistry(System);
   var systemJSPrototype = System.constructor.prototype;
   var constructor = System.constructor;

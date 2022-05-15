@@ -489,7 +489,7 @@
     }
   }
 
-  envGlobal.System = new SystemJS();
+  envGlobal.PentaSystem = new SystemJS();
 
   /*
    * SystemJS browser attachments for script and import map processing

@@ -5,7 +5,7 @@ import { resolveUrl } from '../common.js';
  * filters and content type verifications
  */
 (function(global) {
-  var systemJSPrototype = global.System.constructor.prototype;
+  var systemJSPrototype = global.PentaSystem.constructor.prototype;
 
   var moduleTypesRegEx = /^[^#?]+\.(css|html|json|wasm)([?#].*)?$/;
   systemJSPrototype.shouldFetch = function (url) {
@@ -50,9 +50,9 @@ import { resolveUrl } from '../common.js';
       if (wasmContentType.test(contentType))
         return (WebAssembly.compileStreaming ? WebAssembly.compileStreaming(res) : res.arrayBuffer().then(WebAssembly.compile))
         .then(function (module) {
-          if (!global.System.wasmModules)
-            global.System.wasmModules = Object.create(null);
-          global.System.wasmModules[url] = module;
+          if (!global.PentaSystem.wasmModules)
+            global.PentaSystem.wasmModules = Object.create(null);
+          global.PentaSystem.wasmModules[url] = module;
           // we can only set imports if supported (eg early Safari doesnt support)
           var deps = [];
           var setterSources = [];

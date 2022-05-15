@@ -62,7 +62,7 @@ import { errMsg } from '../err-msg.js';
     }
   }
 
-  global.define = function (arg1, arg2, arg3) {
+  global.pentaDefine = function (arg1, arg2, arg3) {
     var isNamedRegister = typeof arg1 === 'string';
     var name = isNamedRegister ? arg1 : null;
     var depArg = isNamedRegister ? arg2 : arg1;
@@ -92,15 +92,15 @@ import { errMsg } from '../err-msg.js';
     var amdRegister = createAMDRegister(deps, exec);
 
     if (isNamedRegister) {
-      if (System.registerRegistry) {
-        System.registerRegistry[name] = amdRegister;
-        System.register(name, amdRegister[0], amdRegister[1]);
+      if (PentaSystem.registerRegistry) {
+        PentaSystem.registerRegistry[name] = amdRegister;
+        PentaSystem.register(name, amdRegister[0], amdRegister[1]);
       } else
         console.warn(process.env.SYSTEM_PRODUCTION ? errMsg('W6') : errMsg('W6', 'Include named-register.js for full named define support'));
         // TODO: create new warning number and documentation for using named define without named-register extra
-        System.register(amdRegister[0], amdRegister[1]);
+        PentaSystem.register(amdRegister[0], amdRegister[1]);
     } else
-      System.register(amdRegister[0], amdRegister[1]);
+      PentaSystem.register(amdRegister[0], amdRegister[1]);
   };
-  global.define.amd = {};
+  global.pentaDefine.amd = {};
 })(typeof self !== 'undefined' ? self : global);
